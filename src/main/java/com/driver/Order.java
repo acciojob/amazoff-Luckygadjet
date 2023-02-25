@@ -10,21 +10,9 @@ public class Order {
         // The deliveryTime has to converted from string to int and then stored in the attribute
         //deliveryTime  = HH*60 + MM
         this.id = id;
-        int hours = 0;
-        int i = 0;
-        while(deliveryTime.charAt(i) != ':')
-        {
-            hours = hours * 10 + (deliveryTime.charAt(i) - '0');
-            i++;
-        }
-        i++;
-        int minutes =0;
-        while(i<deliveryTime.length())
-        {
-            minutes = minutes * 10 + (deliveryTime.charAt(i) - '0');
-            i++;
-        }
-
+        String[] timearr = deliveryTime.split(":");
+        int hours = Integer.valueOf(timearr[0]);
+        int minutes = Integer.valueOf(timearr[1]);
         this.deliveryTime = (hours * 60) + minutes;
     }
 
