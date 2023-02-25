@@ -41,8 +41,8 @@ public class OrderRepository {
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
-        if(orderMap.containsKey(orderId)&& partnerMap.containsKey(partnerId))
-        {
+        partnerMap.get(partnerId).setNumberOfOrders(partnerMap.get(partnerId).getNumberOfOrders()+1);
+
             if(orderpartnerMap.containsKey(partnerId))
             {
                 orderpartnerMap.get(partnerId).add(orderId);
@@ -53,10 +53,9 @@ public class OrderRepository {
                 l.add(orderId);
                 orderpartnerMap.put(partnerId,l);
             }
-        }
+
         unassighned.remove(orderId);
-        int ord = partnerMap.get(partnerId).getNumberOfOrders();
-        partnerMap.get(partnerId).setNumberOfOrders(ord+1);
+
     }
 
     public Order getOrderById(String orderId) {
@@ -78,19 +77,32 @@ public class OrderRepository {
     }
 
     public List<String> getOrdersByPartnerId(String partnerId) {
+        List<String> orderList = new ArrayList<>();
+        if(orderpartnerMap.containsKey(partnerId))
+        {
+            orderList = orderpartnerMap.get(partnerId);
+        }
 
-            return orderpartnerMap.get(partnerId);
+            return orderList;
 
     }
 
     public List<String> getAllOrders() {
+        List<String> l = new ArrayList<>();
+        if(orderMap.isEmpty() == false)
+        {
+            for(Order s : orderMap.values())
+            {
+                l.add(s.getId());
+            }
+        }
 
-        return new ArrayList<>(orderMap.keySet());
+        return l;
     }
 
     public Integer getCountOfUnassighnedOrders() {
-        Integer count = unassighned.size();
-        return count;
+       return unassighned.size();
+
     }
 
     public Integer getCountofOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
@@ -155,31 +167,16 @@ public class OrderRepository {
     }
 
     public void deleteOrderByid(String orderId) {
-        List<String> l = new ArrayList<>();
-        if(orderMap.containsKey(orderId)) {
-            for (String partId : orderpartnerMap.keySet()) {
-                if (orderpartnerMap.get(partId).contains(orderId)) {
-                    l = orderpartnerMap.get(partId);
-                    int i = 0;
-                    for (String s : l) {
-                        if (s.equals(orderId)) {
-                            l.remove(i);
-                            orderpartnerMap.put(partId, l);
-                            break;
-                        } else {
-                            i++;
-                        }
-
-                    }
-
-                    orderMap.remove(orderId);
-                    break;
-                }
-            }
-        }
+        orderMap.remove(orderId);
             if(unassighned.contains(orderId))
             {
                 unassighned.remove(orderId);
+            }
+            else {
+                for(List<String> listoforders : orderpartnerMap.values())
+                {
+                    listoforders.remove(orderId);
+                }
             }
 
 
