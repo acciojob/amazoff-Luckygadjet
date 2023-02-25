@@ -33,7 +33,7 @@ public class OrderService {
     }
 
     public Integer addordercountbypartnerid(String partnerId) {
-        Integer i = repository.addOrderCountByPartnerId(partnerId);
+        Integer i = repository.getOrderCountByPartnerId(partnerId);
         return i;
     }
 
@@ -46,25 +46,25 @@ public class OrderService {
     }
 
     public Integer getcountofunassignedorders() {
-        Integer i = repository.getCountOfUnassighnedOrders();
+        Integer i = repository.getCountOfUnassignedOrders();
         return i;
     }
 
     public Integer getcountofordersleftaftergiventimebypartnerid(String time, String partnerId) {
-        Integer i = repository.getCountofOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
+        Integer i = repository.getOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
         return i;
     }
 
     public String getlastdeliverytime(String partnerId) {
-        return repository.getLastDeliveryTime(partnerId);
+        return repository.getLastDeliveryTimeByPartnerId(partnerId);
     }
 
     public void deletepartnerbyid(String partnerId) {
 
-        repository.deletePartnerByid(partnerId);
+        repository.deletePartnerById(partnerId);
     }
 
     public void deleteorderbyid(String orderId) {
-        repository.deleteOrderByid(orderId);
+        repository.deleteOrderById(orderId);
     }
 }
