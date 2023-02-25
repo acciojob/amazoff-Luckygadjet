@@ -50,37 +50,30 @@ public class OrderRepository {
     }
 
     public Order getOrderById(String orderId) {
-        if(orderMap.containsKey(orderId))
-        {
+
             return orderMap.get(orderId);
-        }
-        return null;
+
+
     }
 
     public DeliveryPartner getPartnerById(String partnerId) {
-        if(partnerMap.containsKey(partnerId))
-        {
             return partnerMap.get(partnerId);
-        }
-        return null;
+
     }
 
     public Integer addOrderCountByPartnerId(String partnerId) {
         Integer i = 0;
-        if(orderpartnerMap.containsKey(partnerId))
-        {
+
             i = orderpartnerMap.get(partnerId).size();
 
-        }
+
         return i;
     }
 
     public List<String> getOrdersByPartnerId(String partnerId) {
-        if(orderpartnerMap.containsKey(partnerId))
-        {
+
             return orderpartnerMap.get(partnerId);
-        }
-        return null;
+
     }
 
     public List<String> getAllOrders() {
@@ -106,7 +99,8 @@ public class OrderRepository {
                 unassighnedMap.put(ordId,orderMap.get(ordId));
             }
         }
-        return unassighnedMap.size();
+        count = unassighnedMap.size();
+        return count;
     }
 
     public Integer getCountofOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
@@ -143,8 +137,6 @@ public class OrderRepository {
     }
 
     public String getLastDeliveryTime(String partnerId) {
-        if(orderpartnerMap.containsKey(partnerId))
-        {
             List<String> l = orderpartnerMap.get(partnerId);
             int max = Integer.MIN_VALUE;
             for(String s : l)
@@ -162,8 +154,7 @@ public class OrderRepository {
             str.append(t);
 
             return str.toString();
-        }
-        return null;
+
     }
 
     public void deletePartnerByid(String partnerId) {
