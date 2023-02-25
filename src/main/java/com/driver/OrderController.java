@@ -33,7 +33,8 @@ public class OrderController {
 
     @PostMapping("/add-partner/{partnerId}")
     public ResponseEntity<String> addPartner(@PathVariable String partnerId){
-
+        DeliveryPartner partner = new DeliveryPartner(partnerId);
+        service.addpartner(partnerId,partner);
 
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
     }
