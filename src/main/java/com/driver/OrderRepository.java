@@ -18,7 +18,7 @@ public class OrderRepository {
 
     HashMap<String ,Order> unassighnedMap = new HashMap<>();
 
-    public OrderRepository(HashMap<String, Order> orderMap, HashMap<String, DeliveryPartner> partnerMap, HashMap<String, List<String>> orderpartnerMap, HashMap<String, Order> unassighnedMap) {
+    public OrderRepository() {
         this.orderMap = orderMap;
         this.partnerMap = partnerMap;
         this.orderpartnerMap = orderpartnerMap;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @Autowired
-    OrderService service;
+    OrderService service = new OrderService();
 
 
     @PostMapping("/add-order")
@@ -39,7 +39,7 @@ public class OrderController {
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/add-order-partner-pair")
+    @PutMapping("/add-order-partner-pair") //ocalhost:8098/orders/add-order-partner-pair?orderId="12121"&&partnerId="16"
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
 
         service.addorderpartnerpair(orderId,partnerId);
