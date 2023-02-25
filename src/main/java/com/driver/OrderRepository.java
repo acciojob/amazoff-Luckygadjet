@@ -121,11 +121,13 @@ public class OrderRepository {
             StringBuilder str = new StringBuilder();
             int h = last/60;
             int m = last - (h*60);
-
+            if(h<10) str.append("0");
             String s = Integer.toString(h);
+
             String t = Integer.toString(m);
             str.append(s);
             str.append(":");
+            if(m<10) str.append("0");
             str.append(t);
 
             return str.toString();
