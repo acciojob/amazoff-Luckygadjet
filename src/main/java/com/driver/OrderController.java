@@ -19,25 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("orders")
 public class OrderController {
 
-    @Autowired
+    //@Autowired
     OrderService service = new OrderService();
 
 
     @PostMapping("/add-order")
     public ResponseEntity<String> addOrder(@RequestBody Order order){
+
         service.addorder(order);
+
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
     }
 
     @PostMapping("/add-partner/{partnerId}")
     public ResponseEntity<String> addPartner(@PathVariable String partnerId){
+
         service.addpartner(partnerId);
+
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/add-order-partner-pair") //ocalhost:8098/orders/add-order-partner-pair?orderId="12121"&&partnerId="16"
+    @PutMapping("/add-order-partner-pair")
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
+
         service.addorderpartnerpair(orderId,partnerId);
+
         //This is basically assigning that order to that partnerId
         return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
@@ -54,9 +60,10 @@ public class OrderController {
     @GetMapping("/get-partner-by-id/{partnerId}")
     public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId){
 
-
         DeliveryPartner deliveryPartner = service.getpartnerbyid(partnerId);
+
         //deliveryPartner should contain the value given by partnerId
+
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
     }
 
@@ -64,6 +71,7 @@ public class OrderController {
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
         Integer orderCount = service.addordercountbypartnerid(partnerId);
+
         //orderCount should denote the orders given by a partner-id
 
         return new ResponseEntity<>(orderCount, HttpStatus.CREATED);
